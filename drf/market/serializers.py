@@ -27,6 +27,12 @@ class LotPatchSerializer(serializers.ModelSerializer):
         model = Lot
         fields = ['id', 'winner_id']
 
+    def validate(self, data):
+        # can't allow non owners to patch a lot
+        if self.instance.owner != self.context['request'].user:
+            raise serializers.ValidationError("Only the lot owner can do that.")
+        return data
+
 
 class BidGetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,8 +50,8 @@ class BidSerializer(BidGetSerializer):
 
     def validate(self, data):
         # can't allow users to make bids on their own lots
-        # if data['lot'].owner == data['owner']:
-        #     raise serializers.ValidationError("You can't make a bid on your own lot.")
+        if data['lot'].owner == data['owner']:
+            raise serializers.ValidationError("You can't make a bid on your own lot.")
         # bid value must be higher than the base price
         if data['value'] < data['lot'].price:
             raise serializers.ValidationError("Your bid must be higher than the price")

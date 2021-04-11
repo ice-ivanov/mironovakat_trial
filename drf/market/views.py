@@ -54,5 +54,3 @@ class BidViewSet(viewsets.ModelViewSet):
         else:
             data = list(Bid.objects.filter(lot_id=query).values())
         return JsonResponse(data, safe=False)
-
-
