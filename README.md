@@ -9,7 +9,10 @@
 >Admin: http://localhost:8000/admin/ <br>
 Swagger: http://localhost:8000/swagger/ <br>
 Redoc: http://localhost:8000/redoc/ <br>
-Default credentials: <br>
+Admin credentials: <br>
 *Username: admin* <br>
+*Password: 1234* <br>
+User credentials: <br>
+*Username: user1* <br>
 *Password: 1234* <br>
 <hr>
